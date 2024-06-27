@@ -1,7 +1,17 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../database.js'); // Adjust the path as needed
+const bcrypt = require('bcrypt');
 
-class User extends Model {}
+class User extends Model {
+  async setPassword(password) {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    this.password = hashedPassword;
+  }
+  
+  async checkPassword(password) {
+    return await bcrypt.compare(password, this.password);
+  }
+}
 
 User.init({
   id: {
