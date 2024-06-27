@@ -36,6 +36,24 @@ app.delete('/users', async (req,res) => {
     }
 });
 
+app.post('/login', async (req,res) => {
+    const {username, password} = req.body;
+    try{
+        const user = await User.findOne({where: {username}});
+        if (!user){
+            return res.status(404).send('User not found');
+        }
+        if (! await user.checkPassword(password)){
+            return res.status(401).send('Invalid password');
+        } else {
+            res.status(200).send('Logged in succesfuly');
+        }
+    } catch(error){
+        console.error('Login error:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
