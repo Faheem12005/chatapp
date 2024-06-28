@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function Login({setIsAuthenticated}){
+function Login(){
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -14,9 +14,9 @@ function Login({setIsAuthenticated}){
                 password: password
             });
             if (!response.status){
-                console.log('somethign went wrong');
+                console.log('something went wrong');
             }
-            setIsAuthenticated(true);
+            
             console.log('user logged in succesfully');
             navigate('/dashboard');
         } catch(error){

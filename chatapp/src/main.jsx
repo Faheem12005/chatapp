@@ -3,25 +3,18 @@ import ReactDOM from 'react-dom/client'
 import {createBrowserRouter,RouterProvider,} from "react-router-dom";
 import './index.css'
 import Login from './pages/Login';
-import ProtectedRoute from './components/ProtectedRoute';
-import { useState } from 'react';
 import Dashboard from './pages/Dashboard';
 
 const Main = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const router = createBrowserRouter([
     {
       path: "/login",
-      element: <Login setIsAuthenticated={setIsAuthenticated} />,
+      element: <Login/>,
     },
     {
       path: "/dashboard",
-      element: (
-        <ProtectedRoute isAuthenticated={isAuthenticated}>
-          <Dashboard />
-        </ProtectedRoute>
-      ),
+      element: <Dashboard />
     },
   ]);
 

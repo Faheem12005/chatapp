@@ -1,6 +1,31 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
+const jwt = require('jsonwebtoken');
+
+const secretKey = 'secretkey';
+
+
+const authenticateToken = (req, res, next) => {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    if (!token) {
+        return res.sendStatus(401); // Unauthorized if token is not provided
+    }
+
+    jwt.verify(token, secretKey, (err, user) => {
+        if (err) {
+            return res.sendStatus(403); // Forbidden if token is invalid
+        }
+        console.log(user);
+        req.user = user; // Attach user information to request object for further handling
+        next(); // Move to next middleware or route handler
+    });
+};
+
+
+
 
 router.post('/users', async (req,res) => {
     try{
@@ -15,7 +40,7 @@ router.post('/users', async (req,res) => {
     }
 });
 
-router.delete('/users', async (req,res) => {
+router.delete('/users', authenticateToken, async (req,res) => {
     try{
         const { id } = req.query;
         const user = await User.findByPk(id);
@@ -41,7 +66,12 @@ router.post('/login', async (req,res) => {
         if (! await user.checkPassword(password)){
             return res.status(401).send('Invalid password');
         } else {
-            res.status(200).send('Logged in succesfuly');
+            jwt.sign({username} , secretKey , { expiresIn: '1h' }, (err,token) => {
+                if(err) { console.log(err) } 
+                
+                res.cookie('token',token, {httpOnly: true, secure: false, maxAge: 3600000, sameSite:'strict'})
+                res.status(200).send('Cookie set succesfuly');
+            });
         }
     } catch(error){
         console.error('Login error:', error);
