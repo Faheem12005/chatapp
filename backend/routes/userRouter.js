@@ -5,6 +5,21 @@ const jwt = require('jsonwebtoken');
 
 const secretKey = 'secretkey';
 
+router.post('/auth', (req, res) => {
+    const token = req.cookies.token;
+
+    if (!token) {
+        return res.status(401).json({ isAuthenticated: false, message: 'No token provided' });
+    }
+
+    jwt.verify(token, secretKey, (err, user) => {
+        if (err) {
+            return res.status(403).json({ isAuthenticated: false, message: 'Invalid token' });
+        }
+        res.status(200).json({ isAuthenticated: true });
+    });
+});
+
 
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
