@@ -1,10 +1,16 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
+import { useNavigate } from 'react-router-dom'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function UserDropdown() {
+    const navigate = useNavigate();
+    const handleSignOut = () => {
+        navigate('/login');
+    }
+
   return (
     <Menu as="div" className="relative max-w-24 inline-block text-left">
       <div>
@@ -32,7 +38,8 @@ export default function UserDropdown() {
         <MenuItem>
             {({ focus }) => (
             <button
-                type="submit"
+                onClick={handleSignOut}
+                type="button"
                 className={classNames(
                 focus ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                 'block w-full px-4 py-2 text-left text-sm max-w-32',
