@@ -1,4 +1,5 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 
 function classNames(...classes) {
@@ -7,8 +8,16 @@ function classNames(...classes) {
 
 export default function UserDropdown() {
     const navigate = useNavigate();
-    const handleSignOut = () => {
+    const handleSignOut = async () => {
         navigate('/login');
+        try{
+          const response = await axios.post('/api/logout');
+          if (!response.status){
+            console.log('Server responded with a bad response');
+          }
+        } catch(error){
+          console.log('Error occured',error);
+        }
     }
 
   return (

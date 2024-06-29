@@ -93,4 +93,13 @@ router.post('/login', async (req,res) => {
     }
 });
 
+router.post('/logout', (req,res) => {
+    const token = req.cookies.token;
+    if (!token){
+        res.status(404).send('already logged out');
+    }
+    res.clearCookie('token',{httpOnly: true});
+    res.status(200).json({ message: 'Logged out successfully' });
+})
+
 module.exports = router;
