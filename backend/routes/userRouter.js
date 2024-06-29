@@ -9,14 +9,14 @@ router.post('/auth', (req, res) => {
     const token = req.cookies.token;
 
     if (!token) {
-        return res.status(401).json({ isAuthenticated: false, message: 'No token provided' });
+        return res.status(401).json({message: 'No token provided' });
     }
 
     jwt.verify(token, secretKey, (err, user) => {
         if (err) {
-            return res.status(403).json({ isAuthenticated: false, message: 'Invalid token' });
+            return res.status(403).json({message: 'Invalid token' });
         }
-        res.status(200).json({ isAuthenticated: true });
+        res.status(200).json({user});
     });
 });
 
@@ -83,7 +83,6 @@ router.post('/login', async (req,res) => {
         } else {
             jwt.sign({username} , secretKey , { expiresIn: '1h' }, (err,token) => {
                 if(err) { console.log(err) } 
-                
                 res.cookie('token',token, {httpOnly: true, secure: false, maxAge: 3600000, sameSite:'strict'})
                 res.status(200).send('Cookie set succesfuly');
             });

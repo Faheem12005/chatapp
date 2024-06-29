@@ -1,8 +1,8 @@
 import {createBrowserRouter,RouterProvider,} from "react-router-dom";
-import './index.css'
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Auth from "./components/Auth";
+import './index.css'
 
 const App = () => {
 

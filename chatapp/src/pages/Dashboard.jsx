@@ -1,6 +1,11 @@
+import Sidebar from "./Sidebar";
+
 function Dashboard(){
+
     return(
-        <div>Dashboard</div>
+        <>
+        <Sidebar/>
+        </>
     );
 }
 
