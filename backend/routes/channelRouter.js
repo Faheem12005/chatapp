@@ -25,6 +25,24 @@ router.get('/channels', async(req,res) => {
     } catch(error){
         res.status(400).json({ error: error.message });
     }
+
+    
+router.delete('/channels',async(req,res) => {
+    try{
+        const { id } = req.query;
+        const channel = await Channel.findByPk(id);
+        if (channel){
+            await channel.destroy();
+            res.status(204).send();
+            console.log('Channel deleted successfully');
+        } else{
+            res.status(404).send('Channel not found');
+        }
+    } catch(error){
+        res.status(400).json({ error: error.message });
+    }
+});
+
 });
 
 

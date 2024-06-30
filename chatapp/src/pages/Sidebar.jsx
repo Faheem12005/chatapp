@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import UserDropdown from "../components/UserDropdown";
 import NewChannelButton from "../components/NewChannelButton";
+import Channels from "../components/Channels";
 
 function Sidebar(){
     const user = useSelector((state) => state.user.username);
@@ -13,7 +14,7 @@ function Sidebar(){
             <p>Welcome {user}</p>
             <UserDropdown/>
             <NewChannelButton/>
-
+            <Channels/>
         </div>
         </>
     )

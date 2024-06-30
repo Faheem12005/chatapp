@@ -1,27 +1,42 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setChannels } from '../features/user/channelSlice'
 
 function NewChannelButton() {
+    const dispatch = useDispatch();
     const [showPopup, setShowPopup] = useState(false);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
 
+    useEffect(() => {
+        const fetchChannels = async() => {
+            try{
+                const response = await axios.get('/api/channels');
+                dispatch(setChannels(response.data));
+                console.log('Channels fetched succesfully');
+            } catch(error){
+                console.log('error occured',error)
+            }
+        }
+        fetchChannels();
+        
+    },[showPopup]);
+
     // Function to handle "Escape" key press
     const handleEscapeKey = (event) => {
-        if (event.keyCode === 27) { // Check if key pressed is "Escape"
-            setShowPopup(false); // Close the popup if it's open
+        if (event.keyCode === 27) {
+            setShowPopup(false);
         }
     };
 
     useEffect(() => {
-        // Add event listener when component mounts
         document.addEventListener("keydown", handleEscapeKey);
 
-        // Clean up event listener when component unmounts
         return () => {
             document.removeEventListener("keydown", handleEscapeKey);
         };
-    }, []); // Empty dependency array ensures effect runs only on mount and unmount
+    }, []);
 
     const handleNewChannel = () => {
         setShowPopup(true);
@@ -29,7 +44,6 @@ function NewChannelButton() {
 
     const handleClosePopup = () => {
         setShowPopup(false);
-        // Optionally, reset form fields when closing the popup
         setName('');
         setDescription('');
     }
