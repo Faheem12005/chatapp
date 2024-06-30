@@ -1,5 +1,6 @@
 const sequelize = require('./database.js');
 const User = require('./models/user.js');
+const Channel = require('./models/channel.js')
 
 const syncDb = async() => {
     try{
