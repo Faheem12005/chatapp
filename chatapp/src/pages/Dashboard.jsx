@@ -1,10 +1,12 @@
 import Sidebar from "./Sidebar";
+import ChannelDescription from "../components/ChannelDescription";
 
 function Dashboard(){
 
     return(
         <>
         <Sidebar/>
+        <ChannelDescription/>
         </>
     );
 }
