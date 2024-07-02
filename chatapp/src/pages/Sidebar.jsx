@@ -9,10 +9,13 @@ function Sidebar(){
 
     return(
         <>
-        <div className="flex flex-col pl-4 max-w-sm min-w-48 bg-gray-400 h-full absolute">
+        <div className="flex flex-col p-4 max-w-sm min-w-48 bg-fuchsia-950 h-full absolute text-white">
             <p className="text-xl font-bold">YapFest</p>
-            <p>Welcome {user}</p>
-            <UserDropdown/>
+            <div className="flex items-center gap-2 ">
+                <p className="text-gray-300">{user}</p>
+                <UserDropdown/>
+            </div>
+
             <NewChannelButton/>
             <Channels/>
         </div>

@@ -23,8 +23,10 @@ export default function UserDropdown() {
   return (
     <Menu as="div" className="relative max-w-24 inline-block text-left">
       <div>
-        <MenuButton className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-          Options
+        <MenuButton className="shadow-sm flex justify-center items-center pt-1">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4 text-gray-300">
+          <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+          </svg>
         </MenuButton>
       </div>
 
