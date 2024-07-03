@@ -15,7 +15,6 @@ function Sidebar(){
                 <p className="text-gray-300">{user}</p>
                 <UserDropdown/>
             </div>
-
             <NewChannelButton/>
             <Channels/>
         </div>
