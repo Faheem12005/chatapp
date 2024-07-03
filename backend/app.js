@@ -30,6 +30,7 @@ io.on('connection', (socket) => {
       socket.join(room);
       console.log(`Client joined room: ${room}`);
     });
+    
   
     // Leave a room
     socket.on('leaveRoom', (room) => {
@@ -40,7 +41,6 @@ io.on('connection', (socket) => {
     // Handle chat message
     socket.on('chatMessage', async ({ room, message, username }) => {
         try{
-            io.to(room).emit('message', message);
             let user = await User.findOne({where: { username }});
             if (!user){
                 console.log('user not found');
