@@ -1,5 +1,6 @@
 import Sidebar from "./Sidebar";
 import ChannelDescription from "../components/ChannelDescription";
+import Input from "../components/Input";
 
 function Dashboard(){
 
@@ -7,6 +8,7 @@ function Dashboard(){
         <>
         <Sidebar/>
         <ChannelDescription/>
+        <Input/>
         </>
     );
 }
