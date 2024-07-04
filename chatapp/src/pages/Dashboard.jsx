@@ -5,11 +5,13 @@ import Input from "../components/Input";
 function Dashboard(){
 
     return(
-        <>
+        <div className="flex justify-between h-screen">
         <Sidebar/>
-        <ChannelDescription/>
+        <div className="w-full flex items-end">
         <Input/>
-        </>
+        </div>
+        <ChannelDescription/>
+        </div>
     );
 }
 

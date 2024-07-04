@@ -36,7 +36,7 @@ function Input(){
     };
 
     return(
-        <div className="fixed bottom-2 flex justify-center w-full">
+        <div className="flex justify-center w-full p-3">
             {messages.map((msg,index) => (
                 <div key={index}>{msg.username}: {msg.content}</div>
             ))}

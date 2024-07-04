@@ -9,7 +9,7 @@ function Sidebar(){
 
     return(
         <>
-        <div className="flex flex-col p-4 max-w-sm min-w-48 bg-fuchsia-950 h-full absolute text-white">
+        <div className="flex flex-col p-4 max-w-sm min-w-48 bg-fuchsia-950 h-full text-white">
             <p className="text-xl font-bold">YapFest</p>
             <div className="flex items-center gap-2 ">
                 <p className="text-gray-300">{user}</p>
