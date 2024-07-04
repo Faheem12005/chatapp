@@ -3,9 +3,11 @@ import { useSelector,useDispatch } from 'react-redux';
 import { deleteChannel } from '../features/user/channelSlice';
 import { setCurrentChannel } from '../features/user/currentChannelSlice';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Channels = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleClick = async(channelId) => {
         try{
@@ -22,6 +24,7 @@ const Channels = () => {
 
     const handleChannelClick = (channel) => {
       dispatch(setCurrentChannel(channel));
+      navigate(`/dashboard/${channel.id}`)
     }
 
 

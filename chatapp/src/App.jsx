@@ -15,6 +15,10 @@ const App = () => {
       path: "/dashboard",
       element:<Auth><Dashboard/></Auth>
     },
+    {
+      path: "/dashboard/:channelId",
+      element: <Auth><Dashboard/></Auth>
+    }
   ]);
 
   return (

@@ -1,6 +1,7 @@
 import Sidebar from "./Sidebar";
 import ChannelDescription from "../components/ChannelDescription";
 import Input from "../components/Input";
+import Messages from "../components/Messages";
 
 function Dashboard(){
 
@@ -8,7 +9,8 @@ function Dashboard(){
         <div className="flex justify-between h-screen">
         <Sidebar/>
         <div className="w-full flex items-end">
-        <Input/>
+            <Messages/>
+            <Input/>
         </div>
         <ChannelDescription/>
         </div>

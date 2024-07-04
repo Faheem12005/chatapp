@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Channel = require('../models/channel');
 const jwt = require('jsonwebtoken');
+const Message = require('../models/message');
+const User = require('../models/user');
 
 
 const secretKey = 'secretkey';
@@ -42,6 +44,32 @@ router.delete('/channels',async(req,res) => {
         res.status(400).json({ error: error.message });
     }
 });
+
+router.get('/channels/:id', async(req,res) => {
+    try{
+        console.log('checking for messages');
+        const id = req.params.id;
+        const messages = await Message.findAll({
+            where: { channelId: id},
+            include: {
+                model: User,
+                attributes: ['username'],
+            },
+        });
+        if (!messages){
+            res.status(404).json("no messages found")
+        }
+        console.log(messages);
+        const formattedMessages = messages.map(message => ({
+            username: message.User.username,
+            content: message.content,
+        }));
+        res.status(200).json(formattedMessages);
+    } catch(error){
+        res.status(400).json({ error: error.message });
+    }
+})
+
 
 });
 
