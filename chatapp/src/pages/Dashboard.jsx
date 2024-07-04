@@ -8,7 +8,7 @@ function Dashboard(){
     return(
         <div className="flex justify-between h-screen">
         <Sidebar/>
-        <div className="w-full flex items-end">
+        <div className="w-full flex flex-col items-end h-screen justify-between">
             <Messages/>
             <Input/>
         </div>
