@@ -3,11 +3,10 @@ import { useSelector } from "react-redux";
 function ChannelDescription(){
 
     const current = useSelector((state) => state.currentChannel.channel);
-    console.log(current);
     return(
         <>
         { current && 
-            <div className="flex flex-col items-end right-0 h-full border">
+            <div className="flex flex-col items-end right-0 h-full border min-w-48">
                 <div className="flex flex-row-reverse justify-between items-center border w-full p-4">
                     <div className="">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">

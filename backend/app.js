@@ -49,7 +49,6 @@ io.on('connection', (socket) => {
                 console.log(`channel ${id} deleted succesfully`);
                 io.emit('channelDeleted',id);
             } else{
-                console.log(id);
                 console.log(`Channel not found`);
             }
         } catch(error){

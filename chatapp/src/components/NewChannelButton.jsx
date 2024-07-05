@@ -8,13 +8,16 @@ function NewChannelButton() {
     const [showPopup, setShowPopup] = useState(false);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
+    const [errormsg,setErrormsg] = useState(null);
 
     useEffect(() => {
         const fetchChannels = async() => {
             try{
                 const response = await axios.get('/api/channels');
                 dispatch(setChannels(response.data));
-                console.log('Channels fetched succesfully');
+                if (response.status){
+                    console.log('Channels fetched succesfully');
+                }
             } catch(error){
                 console.log('error occured',error)
             }
@@ -26,7 +29,7 @@ function NewChannelButton() {
     // Function to handle "Escape" key press
     const handleEscapeKey = (event) => {
         if (event.keyCode === 27) {
-            setShowPopup(false);
+            handleClosePopup();
         }
     };
 
@@ -44,6 +47,7 @@ function NewChannelButton() {
 
     const handleClosePopup = () => {
         setShowPopup(false);
+        setErrormsg(null);
         setName('');
         setDescription('');
     }
@@ -51,6 +55,10 @@ function NewChannelButton() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try{
+            if (name.length === 0 || description.length === 0){
+                setErrormsg('Please enter a name and description');
+                return;
+            }
             const response = await axios.post('/api/channels',{
             name: name,
             description: description,
@@ -79,6 +87,7 @@ function NewChannelButton() {
                 <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center">
                     <div className="absolute inset-0 bg-gray-800 opacity-75"></div>
                     <div className="relative bg-white px-4 py-3 rounded-lg shadow-lg w-2/4">
+                        {errormsg && <p className="text-red-600 font-bold">{errormsg}</p>}
                         <form className="flex flex-col" id="create" onSubmit={handleSubmit}>
                             <label htmlFor="name">Channel Name:</label>
                             <input 
