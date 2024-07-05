@@ -82,7 +82,7 @@ function NewChannelButton() {
                         <form className="flex flex-col" id="create" onSubmit={handleSubmit}>
                             <label htmlFor="name">Channel Name:</label>
                             <input 
-                                className="border mb-4 p-2 h-7"
+                                className="border mb-4 p-2 h-7 text-black"
                                 type="text"
                                 id="name"
                                 value={name}
@@ -90,7 +90,7 @@ function NewChannelButton() {
                             />
                             <label htmlFor="description">Channel Description:</label>
                             <input 
-                                className="border mb-4 p-2 h-7"
+                                className="border mb-4 p-2 h-7 text-black"
                                 type="text"
                                 id="description"
                                 value={description}
@@ -100,7 +100,7 @@ function NewChannelButton() {
                             </div>
                         </form>
                         <div className="flex justify-between items-center">
-                            <button form="create" type="submit" className="bg-zinc-200 rounded-sm px-5 py-1 hover:bg-gray-400 transition duration-75">Create</button>
+                            <button form="create" type="submit" className="bg-lime-500 rounded-sm px-5 py-1 hover:bg-lime-600 transition duration-75">Create</button>
                             <p className="text-gray-400">Press Esc to Close</p>
                         </div>
                        

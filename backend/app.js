@@ -37,6 +37,25 @@ io.on('connection', (socket) => {
       socket.leave(room);
       console.log(`Client left room: ${room}`);
     });
+
+    //delete a channel
+    socket.on('deleteChannel', async(id) => {
+        try{
+            console.log(id);
+            const channel = await Channel.findByPk(id);
+            if(channel){
+                await Message.destroy({ where: {channelId: id}})
+                await channel.destroy();
+                console.log(`channel ${id} deleted succesfully`);
+                io.emit('channelDeleted',id);
+            } else{
+                console.log(id);
+                console.log(`Channel not found`);
+            }
+        } catch(error){
+            console.log('Error occured',error);
+        }
+    });
   
     // Handle chat message
     socket.on('chatMessage', async ({ room, message, username }) => {

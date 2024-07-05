@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import io from 'socket.io-client';
 import { addMessages } from "../features/user/messagesSlice";
-
-const socket = io('http://localhost:3000');
+import socket from "../socket"
 
 function Input() {
     const dispatch = useDispatch();
-
     const [message, setMessage] = useState('');
     const user = useSelector((state) => state.user.username);
     const channel = useSelector((state) => state.currentChannel.channel);
@@ -15,7 +12,7 @@ function Input() {
     useEffect(() => {
         if (channel) {
             socket.emit('joinRoom', channel.id);
-            console.log(`Joined room ${channel.id}`);
+            console.log(`Joined room ${channel.id}`); 
 
             socket.on('message', handleIncomingMessage);
         }
@@ -31,7 +28,6 @@ function Input() {
 
     const handleIncomingMessage = (msg) => {
         dispatch(addMessages(msg));
-        console.log(msg);
     };
 
     const handleSubmit = (event) => {
