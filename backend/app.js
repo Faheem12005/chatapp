@@ -78,6 +78,7 @@ io.on('connection', (socket) => {
             io.to(room).emit('message', {
                 username: user.username,
                 content: newMessage.content,
+                time: new Date().toISOString(),
             });
             console.log('message sent succesfully');
         } catch(error){

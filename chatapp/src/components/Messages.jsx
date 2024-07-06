@@ -10,6 +10,14 @@ function Messages() {
     const dispatch = useDispatch();
     const containerRef = useRef(null);
 
+    function convertToIST(isoString) {
+        const date = new Date(isoString);
+        // Options for toLocaleString to format in IST
+        const options = { timeZone: 'Asia/Kolkata', hour12: false, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        return date.toLocaleString('en-GB', options).split(', ')[1].slice(0,5);
+    }
+    
+
     const scrollToBottom = () => {
         if (containerRef.current) {
             containerRef.current.scrollTop = containerRef.current.scrollHeight;
@@ -40,9 +48,15 @@ function Messages() {
             {loading ? 
                 <div>Loading...</div>
              : 
-                <div ref={containerRef} className="overflow-y-auto w-full p-2">
+                <div ref={containerRef} className="overflow-y-scroll p-2">
                     {messages.map((msg, index) => (
-                        <p key={index}><span className="font-bold">{msg.username}</span>: {msg.content}</p>
+                        <>
+                        <div className="space-x-1" key={index}>
+                            <span className="font-semibold">{msg.username}</span>
+                            <span className=" text-gray-500 text-xs">{convertToIST(msg.time)}</span>
+                        </div>
+                        <p className="text-sm">{msg.content}</p>
+                        </>
                     ))}
                 </div>
              }

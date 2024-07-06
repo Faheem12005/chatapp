@@ -6,20 +6,20 @@ function ChannelDescription(){
     return(
         <>
         { current && 
-            <div className="flex flex-col items-end right-0 h-full border min-w-48">
-                <div className="flex flex-row-reverse justify-between items-center border w-full p-4">
+            <div className="flex flex-col h-full min-w-52 divide-y border-l">
+                <div className="flex flex-row-reverse justify-between items-center w-full px-4 h-16">
                     <div className="">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                         </svg>
                     </div>
                     <div>
-                        <p className="font-bold text-lg">Details</p>
-                        <p className="text-gray-500">#{current.name}</p>   
+                        <p className="font-bold">Details</p>
+                        <p className="text-gray-500 text-xs">#{current.name}</p>   
                     </div>
 
                 </div>
-                <div className="border w-full p-4 flex justify-between">
+                <div className="w-full p-4 flex justify-between">
                     <div className=" bg-gray-100 rounded-full p-2">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 rounded-full">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
@@ -37,7 +37,7 @@ function ChannelDescription(){
                     </div>
 
                 </div>
-                <div className="border w-full p-4">
+                <div className="w-full p-4">
                     <p className="font-bold text-lg">About</p>
                     <p>{current.description}</p>
                 </div>

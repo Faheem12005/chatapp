@@ -63,6 +63,7 @@ router.get('/channels/:id', async(req,res) => {
         const formattedMessages = messages.map(message => ({
             username: message.User.username,
             content: message.content,
+            time: message.createdAt,
         }));
         res.status(200).json(formattedMessages);
     } catch(error){
