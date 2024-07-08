@@ -5,7 +5,7 @@ function ChannelDescription(){
     const current = useSelector((state) => state.currentChannel.channel);
     return(
         <>
-        { current && 
+        { current ? 
             <div className="flex flex-col h-full min-w-52 divide-y border-l">
                 <div className="flex flex-row-reverse justify-between items-center w-full px-4 h-16">
                     <div className="">
@@ -40,6 +40,22 @@ function ChannelDescription(){
                 <div className="w-full p-4">
                     <p className="font-bold text-lg">About</p>
                     <p>{current.description}</p>
+                </div>
+            </div> : 
+            <div className="flex flex-col h-full min-w-52 divide-y border-l">
+                <div className="flex flex-row-reverse justify-between items-center w-full px-4 h-16">
+                    <div className="">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p className="font-bold">Details</p>
+                        <p className="text-gray-500 text-xs">#Channel name</p>   
+                    </div>
+                </div>
+                <div className="p-4">
+                    <p>Pick a Channel To get Started!</p>
                 </div>
             </div>
         }

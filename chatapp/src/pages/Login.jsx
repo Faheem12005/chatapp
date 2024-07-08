@@ -25,13 +25,23 @@ function Login(){
     }
 
     return(
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="username">username</label>
-            <input id="username" type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="type in username"/>
-            <label htmlFor="password">password</label>
-            <input id="password" type="text" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="type in username"/>
-            <button type="submit">Login</button>
+        <>
+        <div className="fixed top-10 left-10">
+            <p className="text-3xl font-bold">Login To YapFest!</p>
+            <p></p>
+        </div>
+        <form className="h-screen w-screen flex flex-col gap-4 justify-center items-center" onSubmit={handleSubmit}>
+            <div className="flex flex-col gap-2">
+                <label className="font-bold" htmlFor="username">Username</label>
+                <input className="h-16 w-80 border rounded-xl p-4 focus:outline-none focus:ring-1 ring-black" id="username" type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="type in username"/>
+            </div>
+            <div className="flex flex-col gap-2">
+                <label className="font-bold" htmlFor="password">password</label>
+                <input className="h-16 w-80 border rounded-xl p-4 focus:outline-none focus:ring-1 ring-black" id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="type in username"/>
+            </div>
+            <button className="w-64 h-16 bg-black text-white rounded-3xl mt-8 hover:bg-gray-600 transition duration-150" type="submit">Login</button>
         </form>
+        </>
     );
 }
 

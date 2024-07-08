@@ -5,7 +5,7 @@ const Message = require('./models/message.js');
 
 const syncDb = async() => {
     try{
-        await sequelize.sync();
+        await sequelize.sync({alter: true});
         console.log('database and tables created');
     } catch(error){
         console.error('Error syncing database:', error);

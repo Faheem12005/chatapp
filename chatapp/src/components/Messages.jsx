@@ -6,7 +6,8 @@ import axios from 'axios';
 function Messages() {
     const messages = useSelector((state) => state.messages.messages);
     const channel = useSelector((state) => state.currentChannel.channel);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
+    const [selected,setSelected] = useState(false);
     const dispatch = useDispatch();
     const containerRef = useRef(null);
 
@@ -26,6 +27,7 @@ function Messages() {
 
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true);
             if (channel) {
                 const response = await axios.get(`/api/channels/${channel.id}`);
                 if (!response.status) {
@@ -40,23 +42,52 @@ function Messages() {
     }, [channel, dispatch]);
 
     useEffect(() => {
+        if(!loading){
+            if(!channel){
+                setSelected(false);
+            } else{
+                setSelected(true);
+            }
+        }
+    },[loading])
+
+    useEffect(() => {
         scrollToBottom();
     }, [messages]);
 
     return (
         <>
-            {loading ? 
-                <div>Loading...</div>
-             : 
+        {!selected && 
+        <div className="p-6">
+            <p className="font-bold text-lg">Select A channel To start Messaging!</p>
+        </div>}
+            {loading && channel ? 
+                <div className="p-2 flex flex-col gap-2">
+                    <div className="h-7 w-14 bg-gray-500 rounded-xl"></div>
+                    <div className="h-7 w-52 bg-gray-500 rounded-xl"></div>
+                    <div className="h-7 w-14 bg-gray-500 rounded-xl"></div>
+                    <div className="h-7 w-52 bg-gray-500 rounded-xl"></div>
+                    <div className="h-7 w-14 bg-gray-500 rounded-xl"></div>
+                    <div className="h-7 w-52 bg-gray-500 rounded-xl"></div>
+                    <div className="h-7 w-14 bg-gray-500 rounded-xl"></div>
+                    <div className="h-7 w-52 bg-gray-500 rounded-xl"></div>
+                    <div className="h-7 w-14 bg-gray-500 rounded-xl"></div>
+                    <div className="h-7 w-52 bg-gray-500 rounded-xl"></div>
+                    <div className="h-7 w-14 bg-gray-500 rounded-xl"></div>
+                    <div className="h-7 w-52 bg-gray-500 rounded-xl"></div>
+                    <div className="h-7 w-14 bg-gray-500 rounded-xl"></div>
+                    <div className="h-7 w-52 bg-gray-500 rounded-xl"></div>
+                </div>
+             : selected &&
                 <div ref={containerRef} className="overflow-y-scroll p-2">
                     {messages.map((msg, index) => (
-                        <>
-                        <div className="space-x-1" key={index}>
-                            <span className="font-semibold">{msg.username}</span>
-                            <span className=" text-gray-500 text-xs">{convertToIST(msg.time)}</span>
+                        <div key={index}>
+                            <div className="space-x-1" key={index}>
+                                <span className="font-semibold">{msg.username}</span>
+                                <span className=" text-gray-500 text-xs">{convertToIST(msg.time)}</span>
+                            </div>
+                            <p className="text-sm">{msg.content}</p>
                         </div>
-                        <p className="text-sm">{msg.content}</p>
-                        </>
                     ))}
                 </div>
              }

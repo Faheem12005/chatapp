@@ -89,7 +89,7 @@ function NewChannelButton() {
                     <div className="relative bg-white px-4 py-3 rounded-lg shadow-lg w-2/4">
                         {errormsg && <p className="text-red-600 font-bold">{errormsg}</p>}
                         <form className="flex flex-col" id="create" onSubmit={handleSubmit}>
-                            <label htmlFor="name">Channel Name:</label>
+                            <label className="text-black" htmlFor="name">Channel Name:</label>
                             <input 
                                 className="border mb-4 p-2 h-7 text-black"
                                 type="text"
@@ -97,7 +97,7 @@ function NewChannelButton() {
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                             />
-                            <label htmlFor="description">Channel Description:</label>
+                            <label className="text-black" htmlFor="description">Channel Description:</label>
                             <input 
                                 className="border mb-4 p-2 h-7 text-black"
                                 type="text"
