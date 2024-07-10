@@ -16,7 +16,7 @@ router.post('/auth', (req, res) => {
         if (err) {
             return res.status(403).json({message: 'Invalid token' });
         }
-        res.status(200).json({user});
+        res.status(200).json(user);
     });
 });
 
@@ -81,7 +81,7 @@ router.post('/login', async (req,res) => {
         if (! await user.checkPassword(password)){
             return res.status(401).send('Invalid password');
         } else {
-            jwt.sign({username} , secretKey , { expiresIn: '1h' }, (err,token) => {
+            jwt.sign({username, id: user.id} , secretKey , { expiresIn: '1h' }, (err,token) => {
                 if(err) { console.log(err) } 
                 res.cookie('token',token, {httpOnly: true, secure: false, maxAge: 3600000, sameSite:'strict'})
                 res.status(200).send('Cookie set succesfuly');

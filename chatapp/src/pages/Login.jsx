@@ -28,6 +28,7 @@ function Login(){
         <>
         <div className="fixed top-10 left-10">
             <p className="text-3xl font-bold">Login To YapFest!</p>
+            <p className="font-light">For all your yapping needs.<br/> Choose<span className="font-bold"> Yapfest.</span></p>
             <p></p>
         </div>
         <form className="h-screen w-screen flex flex-col gap-4 justify-center items-center" onSubmit={handleSubmit}>

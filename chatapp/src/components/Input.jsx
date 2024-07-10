@@ -6,7 +6,7 @@ import socket from "../socket"
 function Input() {
     const dispatch = useDispatch();
     const [message, setMessage] = useState('');
-    const user = useSelector((state) => state.user.username);
+    const user = useSelector((state) => state.user.user);
     const channel = useSelector((state) => state.currentChannel.channel);
 
     useEffect(() => {
@@ -34,7 +34,7 @@ function Input() {
         event.preventDefault();
         if (message.trim() !== '') {
             // Emit message to the current channel room
-            socket.emit('chatMessage', { room: channel.id, message, username: user });
+            socket.emit('chatMessage', { room: channel.id, message, username: user.username });
             setMessage('');
         }
     };
