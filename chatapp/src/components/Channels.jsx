@@ -29,7 +29,7 @@ const Channels = () => {
       return () => {
         socket.off('channelDeleted',handleChannelDeleted);
       };
-    }, [dispatch,current,navigate]);
+    }, [dispatch,current]);
 
     const handleChannelClick = (channel) => {
       dispatch(setCurrentChannel(channel));
