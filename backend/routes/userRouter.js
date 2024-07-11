@@ -33,7 +33,6 @@ const authenticateToken = (req, res, next) => {
         if (err) {
             return res.sendStatus(403); // Forbidden if token is invalid
         }
-        console.log(user);
         req.user = user; // Attach user information to request object for further handling
         next(); // Move to next middleware or route handler
     });
@@ -81,7 +80,7 @@ router.post('/login', async (req,res) => {
         if (! await user.checkPassword(password)){
             return res.status(401).send('Invalid password');
         } else {
-            jwt.sign({username, id: user.id} , secretKey , { expiresIn: '1h' }, (err,token) => {
+            jwt.sign({username, id: user.id, role: user.roles} , secretKey , { expiresIn: '1h' }, (err,token) => {
                 if(err) { console.log(err) } 
                 res.cookie('token',token, {httpOnly: true, secure: false, maxAge: 3600000, sameSite:'strict'})
                 res.status(200).send('Cookie set succesfuly');

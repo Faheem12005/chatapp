@@ -80,15 +80,20 @@ function Messages() {
                 </div>
              : selected &&
                 <div ref={containerRef} className="overflow-y-scroll p-2">
-                    {messages.map((msg, index) => (
+                    {messages.map((msg, index, array) => {
+                        const showUserInfo = index === 0 || array[index - 1].username !== msg.username;
+
+                        return (
                         <div key={index}>
+                            {showUserInfo &&
                             <div className="space-x-1" key={index}>
                                 <span className="font-semibold">{msg.username}</span>
                                 <span className=" text-gray-500 text-xs">{convertToIST(msg.time)}</span>
                             </div>
+                            }
                             <p className="text-sm">{msg.content}</p>
                         </div>
-                    ))}
+                    )})}
                 </div>
              }
         </>

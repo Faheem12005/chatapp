@@ -1,6 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../database.js'); // Adjust the path as needed
 const bcrypt = require('bcrypt');
+const ROLES = require('../roles.js')
 
 class User extends Model {
   async setPassword(password) {
@@ -27,6 +28,11 @@ User.init({
   password: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  roles: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: ROLES.USER
   }
 }, {
   sequelize,
