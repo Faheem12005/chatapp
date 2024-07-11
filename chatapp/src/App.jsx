@@ -4,6 +4,7 @@ import Dashboard from './pages/Dashboard';
 import Auth from "./components/Auth";
 import './index.css'
 import MainPage from "./pages/MainPage";
+import Settings from "./pages/Settings";
 
 const App = () => {
 
@@ -21,8 +22,8 @@ const App = () => {
       element:<Auth><Dashboard/></Auth>
     },
     {
-      path: "/dashboard/:channelId",
-      element: <Auth><Dashboard/></Auth>
+      path: "/dashboard/settings/:id",
+      element: <Auth><Settings/></Auth>
     }
   ]);
 

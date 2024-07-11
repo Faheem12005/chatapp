@@ -42,6 +42,8 @@ function Messages() {
     }, [channel, dispatch]);
 
     useEffect(() => {
+        console.log(loading);
+        console.log(channel);
         if(!loading){
             if(!channel){
                 setSelected(false);
@@ -49,7 +51,7 @@ function Messages() {
                 setSelected(true);
             }
         }
-    },[loading])
+    },[loading,channel])
 
     useEffect(() => {
         scrollToBottom();
